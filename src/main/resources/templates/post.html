@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title  th:text="${post.title}"></title>
+</head>
+<body>
+<h1 th:text="${post.title}"></h1>
+<p th:text="${post.content}"></p>
+<p>
+    <span th:text="${post.author}"></span>
+    <span th:text="${post.modificationTime}"></span>
+</p>
+<p>
+    <a th:href="@{/post/edit/{postId}(postId=${post.id})}">编辑</a>
+</p>
+<form th:action="@{/post/delete/{postId}(postId=${post.id})}" method="DELETE">
+    <button type="submit">删除</button>
+</form>
+</body>
+</html>

@@ -1,43 +1,30 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta content="text/html;charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/images/favicon.ico" rel="SHORTCUT ICON">
+    <title>abc</title>
 </head>
 <body>
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">访问model</h3>
-    </div>
-    <div class="panel-body">
-        <span th:text="${singlePerson.name}"></span>
-    </div>
-</div>
-<div th:if="${not #lists.isEmpty(people)}">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">列表</h3>
-        </div>
-        <div class="panel-body">
-            <ul class="list-group">
-                <li class="list-group-item" th:each="person : ${people}">
-                    <span th:text="${person.name}"></span>
-                    <span th:text="${person.age}"></span>
-                    <button class="btn" th:onlick="'getName(\''+${person.name}+'\');'">获得名字</button>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:inline="javascript">
-    var single = [[${singlePerson}]];
-    console.log(single.name+"/"+single.age);
-    function getName(name) {
-        console.log(name);
-    }
-</script>
+<h1>abc</h1>
+<ul>
+    <li th:each="obj : ${posts}">
+        <h3><a th:href="@{/post/detail/{objId}(objId=${obj.id})}" th:text="${obj.title}"></a></h3>
+        <p th:text="${obj.content}"></p>
+        <p>
+            作者：<span th:text="${obj.author}"></span> /
+            创建：<span th:text="${obj.creationTime}"></span> /
+            修改：<span th:text="${obj.modificationTime}"></span>
+        </p>
+    </li>
+</ul>
+<a href="/login">登录</a>
+<a href="/write">写文章</a>
 </body>
 </html>
+
+
+

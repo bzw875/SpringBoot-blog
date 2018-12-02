@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title  th:value="${post.title}"></title>
+</head>
+<body>
+    <form method="POST" th:action="@{/post/edit/{postId}(postId=${post.id})}">
+        <h1>编辑</h1>
+        <p>
+            <label>标题:</label>
+            <input type="text" th:value="${post.title}"  name="title">
+        </p>
+        <p>
+            <label>正文:</label>
+            <textarea cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
+        </p>
+        <p>
+            <input type="submit" name="submit" value="提交">
+            <input type="hidden" name="id" th:value="${post.id}">
+        </p>
+    </form>
+</body>
+</html>

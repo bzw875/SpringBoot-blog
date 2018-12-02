@@ -1,4 +1,4 @@
-package com.example.model;
+package com.bzw875.blog.model;
 
 
 /**

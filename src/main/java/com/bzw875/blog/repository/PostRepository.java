@@ -1,13 +1,13 @@
-package com.example.repository;
+package com.bzw875.blog.repository;
 
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.example.model.User;
+import com.bzw875.blog.model.Post;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface PostRepository extends CrudRepository<Post, Long> {
 
 }
