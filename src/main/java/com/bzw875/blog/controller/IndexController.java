@@ -3,11 +3,18 @@ package com.bzw875.blog.controller;
 import com.bzw875.blog.model.Post;
 import com.bzw875.blog.repository.PostRepository;
 import com.bzw875.blog.model.Person;
+import com.bzw875.blog.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +26,14 @@ public class IndexController {
 	@Autowired
 	private PostRepository postRepository;
 
+	@Value("${system.user.name}")
+	private String SystemUserName;
+
+	@Value("${system.user.password}")
+	private String systemUserPassword;
+
+	private AuthenticationService authenticationService;
+
 	@RequestMapping(value = "/")
 	public String index(Model  model) {
 		Iterable<Post> posts =  postRepository.findAll();
@@ -28,8 +43,24 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/login")
-	public String login(Model  model) {
+	public String loginPage(Model  model) {
 		return "login";
+	}
+
+	@RequestMapping(value = "/login/submit")
+	public void login(HttpServletResponse response,
+					  RedirectAttributes redirAttrs,
+					  HttpSession session,
+						@RequestParam String username,
+						@RequestParam String password) throws IOException {
+		if (SystemUserName.equals(username) && systemUserPassword.equals(username)) {
+			session.setAttribute("token", authenticationService.getToken(username, password));
+			response.sendRedirect("/");
+		} else {
+			redirAttrs.addFlashAttribute("errorrMessage", "username or password wrong!");
+			response.sendRedirect("/login");
+		}
+
 	}
 
 	@RequestMapping(value = "/write")

@@ -9,7 +9,7 @@
     <title>abc</title>
 </head>
 <body>
-<h1>abc</h1>
+<div th:include="common::header"></div>
 <ul>
     <li th:each="obj : ${posts}">
         <h3><a th:href="@{/post/detail/{objId}(objId=${obj.id})}" th:text="${obj.title}"></a></h3>
@@ -21,8 +21,6 @@
         </p>
     </li>
 </ul>
-<a href="/login">登录</a>
-<a href="/write">写文章</a>
 </body>
 </html>
 

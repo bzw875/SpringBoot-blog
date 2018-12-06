@@ -5,7 +5,8 @@
     <title>登录</title>
 </head>
 <body>
-    <form method="POST" action="/login">
+<div th:include="common::header"></div>
+    <form method="GET" action="/login/submit">
         <h1>登录</h1>
         <p>
             <label>用户名:</label>
