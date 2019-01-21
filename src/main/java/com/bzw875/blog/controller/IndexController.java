@@ -3,7 +3,7 @@ package com.bzw875.blog.controller;
 import com.bzw875.blog.model.Post;
 import com.bzw875.blog.repository.PostRepository;
 import com.bzw875.blog.model.Person;
-import com.bzw875.blog.service.AuthenticationService;
+import com.bzw875.blog.service.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,6 @@ public class IndexController {
 	@Value("${system.user.password}")
 	private String systemUserPassword;
 
-	private AuthenticationService authenticationService;
 
 	@RequestMapping(value = "/")
 	public String index(Model  model) {
@@ -47,17 +46,26 @@ public class IndexController {
 		return "login";
 	}
 
+	@RequestMapping(value = "/loginout")
+	public void loginOut(HttpServletResponse response, HttpSession session) throws IOException {
+		session.setAttribute(WebSecurityConfig.SESSION_KEY, null);
+		response.sendRedirect("/");
+	}
+
 	@RequestMapping(value = "/login/submit")
 	public void login(HttpServletResponse response,
 					  RedirectAttributes redirAttrs,
 					  HttpSession session,
 						@RequestParam String username,
 						@RequestParam String password) throws IOException {
-		if (SystemUserName.equals(username) && systemUserPassword.equals(username)) {
-			session.setAttribute("token", authenticationService.getToken(username, password));
+		if (SystemUserName.equals(username) && systemUserPassword.equals(password)) {
+			session.setAttribute(WebSecurityConfig.SESSION_KEY, username);
+			redirAttrs.addFlashAttribute("message", "Success");
+			System.out.println("登录成功");
 			response.sendRedirect("/");
 		} else {
-			redirAttrs.addFlashAttribute("errorrMessage", "username or password wrong!");
+			redirAttrs.addFlashAttribute("message", "username or password wrong!");
+			System.out.println("登录失败");
 			response.sendRedirect("/login");
 		}
 
@@ -70,8 +78,7 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/mique")
-	public String test(Model  model)
-	{
+	public String test(Model  model) {
 		Person single = new Person("hyj",21);
 		List<Person> people = new ArrayList<Person>();
 		Person p1 = new Person("dlp",21);

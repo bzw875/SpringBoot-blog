@@ -10,6 +10,7 @@
 </head>
 <body>
 <div th:include="common::header"></div>
+<p th:text="${message}"></p>
 <ul>
     <li th:each="obj : ${posts}">
         <h3><a th:href="@{/post/detail/{objId}(objId=${obj.id})}" th:text="${obj.title}"></a></h3>

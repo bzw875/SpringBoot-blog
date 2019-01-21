@@ -1,37 +1,57 @@
 package com.bzw875.blog.service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+/**
+ * 登录配置 博客出处：http://www.cnblogs.com/GoodHelper/
+ *
+ */
 @Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+    /**
+     * 登录session key
+     */
+    public final static String SESSION_KEY = "user";
+
+    @Bean
+    public SecurityInterceptor getSecurityInterceptor() {
+        return new SecurityInterceptor();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+    public void addInterceptors(InterceptorRegistry registry) {
+        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
+
+        // 拦截配置
+        addInterceptor.addPathPatterns("/write");
+        addInterceptor.addPathPatterns("/post/add");
+        addInterceptor.addPathPatterns("/post/delete/**");
+        addInterceptor.addPathPatterns("/post/edit/**");
     }
 
+    private class SecurityInterceptor extends HandlerInterceptorAdapter {
+
+        @Override
+        public boolean preHandle(HttpServletRequest request,
+                                 HttpServletResponse response,
+                                 Object handler) throws Exception {
+            HttpSession session = request.getSession();
+            if (session.getAttribute(SESSION_KEY) != null)
+                return true;
+
+            // 跳转登录
+            String url = "/login";
+            return false;
+        }
+    }
 }

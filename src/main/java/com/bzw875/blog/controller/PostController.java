@@ -36,7 +36,7 @@ public class PostController {
         return "write";
     }
 
-    @DeleteMapping(path="/delete/{id}")
+    @GetMapping(path="/delete/{id}")
     public void delete(HttpServletResponse response, @PathVariable Long id) throws IOException {
         postRepository.deleteById(id);
         response.sendRedirect("/");
