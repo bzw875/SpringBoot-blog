@@ -30,3 +30,17 @@ spring.datasource.password=123456
 system.user.name=username
 system.user.password=password
 ``` 
+
+```
+// 打包
+mvn clean package  -Dmaven.test.skip=true
+
+// 运行
+java -jar app.jar
+// nohup 运行
+nohup java -jar app.jar &
+// jvm参数
+java -Xms10m -Xmx80m -jar app.jar
+// 指定使用配置
+java -jar app.jar --spring.profiles.active=prod
+```
