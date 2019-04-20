@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
+    <title>首页</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/images/favicon.ico" rel="SHORTCUT ICON">
-    <title>abc</title>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
 </head>
 <body>
+
 <div th:include="common::header"></div>
 <p th:text="${message}"></p>
-<ul>
-    <li th:each="obj : ${posts}">
-        <h3><a th:href="@{/post/detail/{objId}(objId=${obj.id})}" th:text="${obj.title}"></a></h3>
+<div class="main">
+    <div class="post-item" th:each="obj : ${posts}">
+        <h2><a th:href="@{/post/detail/{objId}(objId=${obj.id})}" th:text="${obj.title}"></a></h2>
         <p th:text="${obj.content}"></p>
-        <p>
+        <p class="post-info">
             作者：<span th:text="${obj.author}"></span> /
             创建：<span th:text="${obj.creationTime}"></span> /
             修改：<span th:text="${obj.modificationTime}"></span>
         </p>
-    </li>
-</ul>
+    </div>
+</div>
+<div th:include="common::ICP"></div>
 </body>
 </html>
-
-
-

@@ -37,6 +37,16 @@ public class IndexController {
 	public String index(Model  model) {
 		Iterable<Post> posts =  postRepository.findAll();
 
+		for (Post p: posts) {
+			String content = p.getContent();
+			Integer length = content.length();
+			Integer endIndex = Math.min(100, length);
+			if (length > 100) {
+				content = content.substring(0, endIndex) + "...";
+				p.setContent(content);
+			}
+		}
+
 		model.addAttribute("posts", posts);
 		return "index";
 	}
@@ -77,7 +87,7 @@ public class IndexController {
 		return "write";
 	}
 
-	@RequestMapping(value = "/mique")
+	@RequestMapping(value = "/test")
 	public String test(Model  model) {
 		Person single = new Person("hyj",21);
 		List<Person> people = new ArrayList<Person>();

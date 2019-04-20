@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
+    <title>写文章</title>
     <meta charset="UTF-8">
-    <title>fewf</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/images/favicon.ico" rel="SHORTCUT ICON">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
 </head>
 <body>
 <div th:include="common::header"></div>
+<div class="edit-plane">
     <form method="POST" action="/post/add">
         <h1>写文章</h1>
         <p>
             <label>标题:</label>
+        </p>
+        <p>
             <input type="text"  name="title">
         </p>
         <p>
             <label>正文:</label>
-            <textarea cols="10" rows="5" name="content"></textarea>
         </p>
         <p>
-            <input type="submit" name="submit" value="提交">
+            <textarea cols="10" rows="12" name="content"></textarea>
+        </p>
+        <p>
             <input type="hidden" name="author" th:value="${author}">
             <input type="hidden" name="id" value="">
+            <button type="submit">提交</button>
         </p>
     </form>
+</div>
+<div th:include="common::ICP"></div>
 </body>
 </html>

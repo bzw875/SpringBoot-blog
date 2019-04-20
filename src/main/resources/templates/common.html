@@ -1,11 +1,20 @@
 <div th:fragment="header">
-    <h1>abc</h1>
-    <nav>
-        <a href="/">home</a>
-        <a href="/login">login</a>
-        <a href="/write">write</a>
-        <a href="/mique">mique</a>
-        <a href="/loginout">loginout</a>
-    </nav>
+    <header class="top-bar">
+        <div class="clearfix">
+            <h1 class="logo pull-left"><a href="/">小园香径</a></h1>
+            <nav class="nav-bar pull-left">
+                <a href="/write">写博客</a>
+                <a href="/test">测试</a>
+                <a href="/login">登录</a>
+                <a href="/loginout">退出</a>
+            </nav>
+        </div>
+    </header>
     <p th:text="${errorrMessage}"></p>
+</div>
+
+<div th:fragment="ICP">
+    <div class="footer-bar">
+        <a href="http://www.miibeian.gov.cn/">沪ICP备19005907号-1</a>
+    </div>
 </div>

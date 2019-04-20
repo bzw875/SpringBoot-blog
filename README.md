@@ -43,4 +43,6 @@ nohup java -jar app.jar &
 java -Xms10m -Xmx80m -jar app.jar
 // 指定使用配置
 java -jar app.jar --spring.profiles.active=prod
+// 指定端口
+java -jar blog-0.0.1-SNAPSHOT.jar --server.port=9090
 ```

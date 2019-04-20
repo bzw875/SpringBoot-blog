@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
     <title  th:value="${post.title}"></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/images/favicon.ico" rel="SHORTCUT ICON">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
 </head>
 <body>
-<div th:include="common::header"></div>
-    <form method="POST" th:action="@{/post/edit/{postId}(postId=${post.id})}">
-        <h1>编辑</h1>
-        <p>
-            <label>标题:</label>
-            <input type="text" th:value="${post.title}"  name="title">
-        </p>
-        <p>
-            <label>正文:</label>
-            <textarea cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
-        </p>
-        <p>
-            <input type="submit" name="submit" value="提交">
-            <input type="hidden" name="id" th:value="${post.id}">
-        </p>
-    </form>
+    <div th:include="common::header"></div>
+    <div class="edit-plane">
+        <form method="POST" th:action="@{/post/edit/{postId}(postId=${post.id})}">
+            <h1>编辑</h1>
+            <p>
+                <label>标题:</label>
+                <input type="text" th:value="${post.title}"  name="title">
+            </p>
+            <p>
+                <label>正文:</label>
+                <textarea cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
+            </p>
+            <p>
+                <input type="submit" name="submit" value="提交">
+                <input type="hidden" name="id" th:value="${post.id}">
+            </p>
+        </form>
+    </div>
+    <div th:include="common::ICP"></div>
 </body>
 </html>
