@@ -87,7 +87,7 @@ public class IndexController {
 		return "write";
 	}
 
-	@RequestMapping(value = "/test")
+	@RequestMapping(value = "/mique")
 	public String test(Model  model) {
 		Person single = new Person("hyj",21);
 		List<Person> people = new ArrayList<Person>();
