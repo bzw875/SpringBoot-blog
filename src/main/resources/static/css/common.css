@@ -1,18 +1,23 @@
+html,
 body {
-    background: #fff;
+    margin: 0;
+}
+body {
+    background-color: #fff;
     color: #000;
     font-size: 13px;
     line-height: 1.6;
     font-family: 'Arial', 'Heiti SC', 'Microsoft Yahei', simsun, sans-serif;
-    position: relative
+    position: relative;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: Georgia, 'Heiti SC', 'Microsoft Yahei', simsun, sans-serif;
-    margin: 0
+    margin: 0;
+    font-weight: normal;
 }
 a {
     text-decoration: none;
-    color: #326891;
+    color: #333;
     outline: 0;
 }
 a:hover {
@@ -44,30 +49,34 @@ a:hover {
 
 .main {
     width: 997px;
+    min-height: 600px;
     margin: 0 auto;
+    padding: 20px;
     margin-top: 50px;
+    background-color: #fff;
 }
 .footer-bar {
-    width: 997px;
+    width: 900px;
     margin: 0 auto;
     margin-top: 50px;
+    padding: 20px;
     text-align: center;
 }
 .top-bar {
+
     width: 100%;
     display: block;
     font-size: 16px;
     background-color: #fff;
     border-bottom: 1px solid #ccc;
     margin: 0px auto;
-    padding: 12px 0;
 }
 .top-bar>div {
-    width: 997px;
-    margin: 0 auto;
+    padding: 0 20px;
 }
 .logo>a {
-    color: #333;
+    color: #ccc;
+    font-size: 26px;
 }
 .logo>a:hover {
     text-decoration: none;
@@ -82,13 +91,17 @@ a:hover {
     margin-left: 2em;
 }
 .post-item {
-    margin-bottom: 50px;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e1e1e1;
 }
+
 .post-info {
     color: #999;
+    font-size: 14px;
+    margin: 0;
 }
 .edit-plane {
-    width: 997px;
     margin: 0 auto;
 }
 input,

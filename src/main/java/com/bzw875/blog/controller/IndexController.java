@@ -3,6 +3,7 @@ package com.bzw875.blog.controller;
 import com.bzw875.blog.model.Person;
 import com.bzw875.blog.model.Post;
 import com.bzw875.blog.repository.PostRepository;
+import com.bzw875.blog.service.WebSecurityConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -25,10 +29,10 @@ public class IndexController {
 	@Autowired
 	private PostRepository postRepository;
 
-	@Value("${system.user.name}")
+	@Value("${spring.security.user.name}")
 	private String SystemUserName;
 
-	@Value("${system.user.password}")
+	@Value("${spring.security.user.password}")
 	private String systemUserPassword;
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -57,9 +61,28 @@ public class IndexController {
 		return "login";
 	}
 
+	@RequestMapping(value = "/dologin", method = RequestMethod.POST)
+	public String doLogin(HttpServletResponse response,
+						  @RequestParam String username,
+						  @RequestParam String password,
+						  Model model){
+
+		if(username.equals(SystemUserName) && password.equals(systemUserPassword)){
+			Cookie cookie = new Cookie(WebSecurityConfig.SESSION_KEY, SystemUserName);
+			response.addCookie(cookie);
+			return "redirect:/";
+		}else {
+			model.addAttribute("error", "用户名或者密码错误");
+
+			return "admin/login";
+		}
+	}
+
 	@RequestMapping(value = "/loginout")
 	public void loginOut(HttpServletResponse response, HttpSession session) throws IOException {
-		//session.setAttribute(WebSecurityConfig.SESSION_KEY, null);
+		Cookie cookie = new Cookie(WebSecurityConfig.SESSION_KEY, null);
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
 		response.sendRedirect("/");
 	}
 

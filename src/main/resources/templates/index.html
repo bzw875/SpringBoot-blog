@@ -17,14 +17,21 @@
 <div class="main">
     <div class="post-item" th:each="obj : ${posts}">
         <h2><a th:href="@{/post/detail/{objId}(objId=${obj.id})}" th:text="${obj.title}"></a></h2>
-        <p th:text="${obj.content}"></p>
         <p class="post-info">
-            作者：<span th:text="${obj.author}"></span> /
-            创建：<span th:text="${obj.creationTime}"></span> /
-            修改：<span th:text="${obj.modificationTime}"></span>
+            <span th:text="${obj.creationTime}"></span>
         </p>
     </div>
 </div>
 <div th:include="common::ICP"></div>
+<script type="application/javascript" src="/js/tool.js"></script>
+<script>
+    window.onload = function(){
+        var spans = document.querySelectorAll('.post-info>span');
+        [].forEach.call(spans, function(ele){
+            var d = new Date(ele.textContent);
+            ele.textContent = calcRecentlyDateStr(d);
+        });
+    };
+</script>
 </body>
 </html>

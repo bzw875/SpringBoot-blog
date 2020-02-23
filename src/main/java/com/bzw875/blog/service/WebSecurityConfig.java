@@ -1,37 +1,73 @@
 package com.bzw875.blog.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Created by wangchenghao on 2017/8/5.
+ */
 @Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebMvcConfigurerAdapter{
+
+    public final static String SESSION_KEY = "user";
+
+    @Bean
+    public SecurityInterceptor getSecurityInterceptor() {
+        return new SecurityInterceptor();
+    }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/mique").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+    public void addInterceptors(InterceptorRegistry registry) {
+        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
+
+        // 排除配置
+        addInterceptor.excludePathPatterns(
+                "/",
+                "/home",
+                "/post/detail/**",
+                "/all",
+                "/login",
+                "/dologin",
+                "/loginout",
+                "/test",
+                "/css/**",
+                "/js/**",
+                "/fonts/**",
+                "/images/**");
+        // 拦截配置
+        addInterceptor.addPathPatterns("/**");
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
-    }
 
+
+    private class SecurityInterceptor extends HandlerInterceptorAdapter {
+
+        @Override
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+                throws Exception {
+            Cookie[] cookies = request.getCookies();
+            String path =request.getServletPath();
+            if(path.contains("article") || path.contains("login")){
+                return true;
+            }
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals(SESSION_KEY)) {
+                        return true;
+                    }
+                }
+            }
+            response.sendRedirect("/login");
+            return false;
+        }
+    }
 }
