@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,20 +41,19 @@ public class IndexController {
 
 
 	@RequestMapping(value = "/")
-	public String index(Model  model) {
-		Iterable<Post> posts =  postRepository.findAll();
-
-		for (Post p: posts) {
-			String content = p.getContent();
-			Integer length = content.length();
-			Integer endIndex = Math.min(100, length);
-			if (length > 100) {
-				content = content.substring(0, endIndex) + "...";
-				p.setContent(content);
-			}
-		}
-
-		model.addAttribute("posts", posts);
+	public String index(Model  model,
+						@RequestParam Integer pageNum,
+						@RequestParam Integer pageSize) {
+		PageRequest pageReques = PageRequest.of(pageNum, pageSize);   //获取第1页的两条记录
+		Page<Post> page = postRepository.findAll(pageReques);
+		List<Post> pages= page.getContent();
+		int total = page.getTotalPages();
+		int pageCount = (int) Math.ceil(total/pageSize);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("total", total);
+		model.addAttribute("posts", pages);
 		return "index";
 	}
 

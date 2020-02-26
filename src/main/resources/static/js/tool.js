@@ -52,3 +52,26 @@ function calcRecentlyDateStr(dateIn){
     return formatDate(dateIn, 'yyyy-MM-dd hh:mm');
 }
 //fegewgwgewe
+function indexInitNav (){
+    var pageNum = parseInt($('[name="pageNum"]').val());
+    var pageSize = parseInt($('[name="pageSize"]').val());
+    var pageCount = parseInt($('[name="pageCount"]').val());
+
+
+    var nav = $('.page-nav');
+    var str = '';
+    if (pageNum > 0){
+        str += '<li><a href="?pageNum='+(pageNum-1)+'&pageSize=' + pageSize+'">上一页</a></li>';
+    }
+    var start = Math.max(0, pageNum - 3);
+    var end = Math.min( pageNum + 5, pageCount - 1);
+    for (var i = start; i < end; i++) {
+        var className = i === pageNum ? 'selected' : '';
+        str += '<li class="'+className+'"><a href="?pageNum='+i+'&pageSize=' + pageSize+'">'+(i+1)+'</a></li>';
+    }
+    str += '<li class="' + (pageNum+1 === pageCount ? 'selected' : '') + '"><a title="最后一页" href="?pageNum='+(pageCount-1)+'&pageSize=' + pageSize+'">'+pageCount+'</a></li>';
+    if (pageCount > (pageNum+1)){
+        str += '<li><a href="?pageNum='+(pageNum+1)+'&pageSize=' + pageSize+'">下一页</a></li>';
+    }
+    nav.html(str);
+}

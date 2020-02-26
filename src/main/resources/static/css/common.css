@@ -138,3 +138,24 @@ button {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.page-nav li {
+    float: left;
+    margin-left: 10px;
+}
+.page-nav a {
+    display: block;
+    padding: 0 10px;
+    height: 24px;
+    line-height: 24px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+}
+.page-nav a:hover {
+    color: #000;
+    background-color: #f2f2f2;
+}
+.page-nav .selected a {
+    color: #000;
+    border-color: transparent;
+    background-color: transparent;
+}

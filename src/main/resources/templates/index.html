@@ -9,6 +9,7 @@
     <link href="/images/favicon.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <script type="application/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 
@@ -21,17 +22,28 @@
             <span th:text="${obj.creationTime}"></span>
         </p>
     </div>
+    <ul class="page-nav">
+        <li class="prev"><a href="/">上一页</a></li>
+        <li class="last"><a href="/"></a></li>
+        <li class="next"><a href="/">下一页</a></li>
+    </ul>
+
 </div>
 <div th:include="common::ICP"></div>
 <script type="application/javascript" src="/js/tool.js"></script>
+<input type="hidden" name="pageNum" th:value="${pageNum}">
+<input type="hidden" name="pageSize" th:value="${pageSize}">
+<input type="hidden" name="pageCount" th:value="${pageCount}">
+<input type="hidden" name="total" th:value="${total}">
 <script>
-    window.onload = function(){
-        var spans = document.querySelectorAll('.post-info>span');
-        [].forEach.call(spans, function(ele){
-            var d = new Date(ele.textContent);
-            ele.textContent = calcRecentlyDateStr(d);
-        });
-    };
+$(function(){
+    var spans = document.querySelectorAll('.post-info>span');
+    [].forEach.call(spans, function(ele){
+        var d = new Date(ele.textContent);
+        ele.textContent = calcRecentlyDateStr(d);
+    });
+    indexInitNav();
+});
 </script>
 </body>
 </html>

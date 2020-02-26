@@ -37,7 +37,7 @@ public class PostController {
     }
 
     @GetMapping(path="/delete/{id}")
-    public void delete(HttpServletResponse response, @PathVariable Long id) throws IOException {
+    public void delete(HttpServletResponse response, @PathVariable Integer id) throws IOException {
         postRepository.deleteById(id);
         response.sendRedirect("/");
     }
@@ -48,7 +48,7 @@ public class PostController {
     }
 
     @GetMapping(path="/detail/{id}")
-    public String getPostDetail (Model model, @PathVariable Long id) {
+    public String getPostDetail (Model model, @PathVariable Integer id) {
         Optional<Post> p = postRepository.findById(id);
         Post pp = p.get();
         model.addAttribute("post", pp);
@@ -58,7 +58,7 @@ public class PostController {
 
     @PostMapping(path="/edit/{id}")
     public void editPost (HttpServletResponse response,
-                            @RequestParam Long id,
+                            @RequestParam Integer id,
                             @RequestParam String content,
                             @RequestParam String title) throws IOException {
         Optional<Post> p = postRepository.findById(id);
@@ -77,7 +77,7 @@ public class PostController {
 
 
     @GetMapping(path="/edit/{id}")
-    public String editPost (Model model, @PathVariable Long id) {
+    public String editPost (Model model, @PathVariable Integer id) {
         Optional<Post> p = postRepository.findById(id);
         Post pp = p.get();
         model.addAttribute("post", pp);
