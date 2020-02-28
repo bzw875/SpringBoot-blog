@@ -9,7 +9,7 @@
     <link href="/images/favicon.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <script type="application/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script type="application/javascript" src="/js/jquery.min.js"></script>
 </head>
 <body>
 
@@ -19,14 +19,22 @@
     <div class="post-item" th:each="obj : ${posts}">
         <h2><a th:href="@{/post/detail/{objId}(objId=${obj.id})}" th:text="${obj.title}"></a></h2>
         <p class="post-info">
-            <span th:text="${obj.creationTime}"></span>
+            <span class="calc-recently-date" th:text="${obj.creationTime}"></span>
         </p>
     </div>
-    <ul class="page-nav">
-        <li class="prev"><a href="/">上一页</a></li>
-        <li class="last"><a href="/"></a></li>
-        <li class="next"><a href="/">下一页</a></li>
-    </ul>
+    <div class="foot-div">
+        <ul class="page-nav" id="pageNav">
+            <li class="prev"><a href="/">上一页</a></li>
+            <li class="last"><a href="/"></a></li>
+            <li class="next"><a href="/">下一页</a></li>
+        </ul>
+        <div>
+            总共
+            <span th:text="${total}"></span>
+            篇
+        </div>
+    </div>
+
 
 </div>
 <div th:include="common::ICP"></div>
@@ -37,11 +45,6 @@
 <input type="hidden" name="total" th:value="${total}">
 <script>
 $(function(){
-    var spans = document.querySelectorAll('.post-info>span');
-    [].forEach.call(spans, function(ele){
-        var d = new Date(ele.textContent);
-        ele.textContent = calcRecentlyDateStr(d);
-    });
     indexInitNav();
 });
 </script>

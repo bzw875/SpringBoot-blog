@@ -1,9 +1,11 @@
 html,
 body {
     margin: 0;
+    min-height: 100%;
+    background-color: #eee;
 }
 body {
-    background-color: #fff;
+
     color: #000;
     font-size: 13px;
     line-height: 1.6;
@@ -47,12 +49,44 @@ a:hover {
   visibility: hidden;
 }
 
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-light {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+.edit-plane,
 .main {
     width: 997px;
     min-height: 600px;
     margin: 0 auto;
     padding: 20px;
     margin-top: 50px;
+    border-radius: 4px;
     background-color: #fff;
 }
 .footer-bar {
@@ -74,6 +108,9 @@ a:hover {
 .top-bar>div {
     padding: 0 20px;
 }
+.logo {
+    padding: 12px 0;
+}
 .logo>a {
     color: #ccc;
     font-size: 26px;
@@ -83,6 +120,7 @@ a:hover {
 }
 .nav-bar {
     line-height: 50px;
+    overflow: hidden;
 }
 .nav-bar>a {
     float: left;
@@ -118,25 +156,34 @@ textarea {
   border-radius: 4px;
 }
 button {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+    display: inline-block;
+    padding: 4px 6px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.foot-div {
+    display: flex;
+    align-items: center;
+}
+.page-nav {
+    overflow: hidden;
+    margin-right: 1em;
 }
 .page-nav li {
     float: left;
@@ -144,9 +191,9 @@ button {
 }
 .page-nav a {
     display: block;
-    padding: 0 10px;
-    height: 24px;
-    line-height: 24px;
+    padding: 0 8px;
+    height: 20px;
+    line-height: 20px;
     background-color: #fafafa;
     border: 1px solid #ddd;
 }
@@ -158,4 +205,16 @@ button {
     color: #000;
     border-color: transparent;
     background-color: transparent;
+}
+.edit-box {
+    background-color: #fff;
+}
+.post-menu>form {
+    display: inline-block;
+    margin-left: 2em;
+}
+
+.login-form {
+    width: 480px;
+    margin: 0 auto;
 }

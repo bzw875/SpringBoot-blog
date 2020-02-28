@@ -3,11 +3,14 @@ package com.bzw875.blog.controller;
 
 import com.bzw875.blog.repository.PostRepository;
 import com.bzw875.blog.model.Post;
+import com.bzw875.blog.service.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
@@ -36,8 +39,10 @@ public class PostController {
         return "write";
     }
 
-    @GetMapping(path="/delete/{id}")
-    public void delete(HttpServletResponse response, @PathVariable Integer id) throws IOException {
+    @PostMapping(path="/delete/{id}")
+    public void delete(HttpServletResponse response,
+                       @PathVariable Integer id
+    ) throws IOException {
         postRepository.deleteById(id);
         response.sendRedirect("/");
     }
@@ -48,10 +53,21 @@ public class PostController {
     }
 
     @GetMapping(path="/detail/{id}")
-    public String getPostDetail (Model model, @PathVariable Integer id) {
-        Optional<Post> p = postRepository.findById(id);
-        Post pp = p.get();
+    public String getPostDetail (Model model,
+                                 HttpServletRequest request,
+                                 @PathVariable Integer id) {
+        Post pp = postRepository.findById(id).get();
         model.addAttribute("post", pp);
+        Cookie[] cookies =  request.getCookies();
+        boolean isLogin = false;
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals(WebSecurityConfig.SESSION_KEY)){
+                    isLogin = true;
+                }
+            }
+        }
+        model.addAttribute("isLogin", isLogin);
         return "post";
     }
 

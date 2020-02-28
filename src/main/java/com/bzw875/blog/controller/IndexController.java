@@ -42,18 +42,20 @@ public class IndexController {
 
 	@RequestMapping(value = "/")
 	public String index(Model  model,
-						@RequestParam Integer pageNum,
-						@RequestParam Integer pageSize) {
+		@RequestParam(value = "pageNum", required = true, defaultValue = "0") Integer pageNum,
+		@RequestParam(value = "pageSize", required = true, defaultValue = "10") Integer pageSize) {
 		PageRequest pageReques = PageRequest.of(pageNum, pageSize);   //获取第1页的两条记录
 		Page<Post> page = postRepository.findAll(pageReques);
 		List<Post> pages= page.getContent();
-		int total = page.getTotalPages();
+		int total = page.getTotalPages() * pageSize;
 		int pageCount = (int) Math.ceil(total/pageSize);
+
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("total", total);
 		model.addAttribute("posts", pages);
+
 		return "index";
 	}
 
@@ -95,10 +97,6 @@ public class IndexController {
 		return "write";
 	}
 
-	@RequestMapping(value = "/test")
-	public void test(HttpServletResponse response) throws IOException {
-		response.sendRedirect("/mique");
-	}
 
 	@RequestMapping(value = "/mique")
 	public String mique(Model  model) {
@@ -112,6 +110,6 @@ public class IndexController {
 		people.add(p3);
 		model.addAttribute("singlePerson",single);
 		model.addAttribute("people",people);
-		return "test";
+		return "admin";
 	}
 }

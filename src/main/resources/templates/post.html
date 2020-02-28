@@ -14,11 +14,26 @@
 <div th:include="common::header"></div>
 <div class="main">
     <h1 th:text="${post.title}"></h1>
-    <p>
-        <span th:text="${post.modificationTime}"></span>
-    </p>
+    <div class="post-menu">
+        <span class="calc-recently-date" th:text="${post.creationTime}"></span>
+        <form method="get" th:action="@{'/post/edit/' + ${post.id}}">
+            <button th:if="${isLogin}" type="submit" >编辑</button>
+        </form>
+        <form method="post" id="deleteForm" th:action="@{'/post/delete/' + ${post.id}}">
+            <button th:if="${isLogin}" class="btn-danger" type="submit" >删除</button>
+        </form>
+    </div>
     <p th:text="${post.content}"></p>
 </div>
+
+
 <div th:include="common::ICP"></div>
+<script type="application/javascript" src="/js/jquery.min.js"></script>
+<script type="application/javascript" src="/js/tool.js"></script>
+<script>
+    function deletePost(){
+        $('#deleteForm')[0].submit();
+    }
+</script>
 </body>
 </html>

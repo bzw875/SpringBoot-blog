@@ -7,7 +7,8 @@ html {
 }
 body, div, dl, dt, dd, ul, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, blockquote {
     margin: 0;
-    padding: 0
+    padding: 0;
+    box-sizing: border-box;
 }
 table {
     border-collapse: collapse;
@@ -71,11 +72,9 @@ a:visited {
     text-decoration: none
 }
 a:hover {
-    color: #fff;
     text-decoration: none;
 }
 a:active {
-    color: #fff;
     text-decoration: none;
 }
 a img {

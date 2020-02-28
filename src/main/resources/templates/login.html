@@ -12,7 +12,8 @@
 </head>
 <body>
 <div th:include="common::header"></div>
-    <form method="POST" action="/dologin">
+<div class="main">
+    <form method="POST" action="/dologin" class="login-form">
         <h1>登录</h1>
         <p th:text="${message}"></p>
         <p>
@@ -24,10 +25,13 @@
             <input type="password"   name="password">
         </p>
         <p>
-            <input type="submit"  name="submit" value="登录">
+            <input type="submit"  name="submit" class="btn-info" value="登录">
+        </p>
+        <p>
             <input type="reset" name=reset  value="重置">
         </p>
     </form>
+</div>
 <div th:include="common::ICP"></div>
 </body>
 </html>
