@@ -23,13 +23,12 @@
             <button th:if="${isLogin}" class="btn-danger" type="submit" >删除</button>
         </form>
     </div>
-    <div class="post-content" th:text="${post.content}"></div>
+    <div class="post-content" th:utext="${postContentHtml}">
+    </div>
 </div>
 
 
-<div th:include="common::ICP"></div>
-<script type="application/javascript" src="/js/jquery.min.js"></script>
-<script type="application/javascript" src="/js/tool.js"></script>
+<div th:include="common::default"></div>
 <script>
     function deletePost(){
         $('#deleteForm')[0].submit();

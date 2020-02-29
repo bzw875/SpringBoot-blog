@@ -12,23 +12,44 @@
 </head>
 <body>
     <div th:include="common::header"></div>
-    <div class="edit-plane">
+    <div class="main">
         <form method="POST" th:action="@{/post/edit/{postId}(postId=${post.id})}">
             <h1>编辑</h1>
             <p>
                 <label>标题:</label>
                 <input type="text" th:value="${post.title}"  name="title">
             </p>
-            <p>
-                <label>正文:</label>
-                <textarea cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
-            </p>
-            <p>
-                <input type="submit" class="btn-info" name="submit" value="提交">
+            <p class="edit-menu">
+                <button type="submit" class="btn-info">提交</button>
+                <button type="button" class="btn-light" onclick="switchReview(this)">预览</button>
                 <input type="hidden" name="id" th:value="${post.id}">
             </p>
+            <div id="editDiv">
+                <label>正文:</label>
+                <textarea class="content-input" id="postContent" cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
+            </div>
+            <div id="reviewDiv">
+                <div></div>
+            </div>
         </form>
     </div>
-    <div th:include="common::ICP"></div>
+    <div th:include="common::default"></div>
+<script>
+    function switchReview(ele){
+        if (switchReview.isReview) {
+            ele.textContent = '编辑';
+            $('#editDiv').hide();
+            $('#reviewDiv').show();
+            var md = new remarkable.Remarkable();
+            var postContent = $('#postContent');
+            $('#reviewDiv>div').html(md.render(postContent.val()));
+        } else {
+            ele.textContent = '预览';
+            $('#editDiv').show();
+            $('#reviewDiv').hide();
+        }
+        switchReview.isReview = !switchReview.isReview;
+    }
+</script>
 </body>
 </html>

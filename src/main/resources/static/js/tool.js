@@ -64,8 +64,12 @@ function indexInitNav () {
     var pageSize = parseInt($('[name="pageSize"]').val());
     var pageCount = parseInt($('[name="pageCount"]').val());
 
-
     var nav = $('#pageNav');
+    if (pageCount<=1) {
+        nav.hide();
+        return;
+    }
+
     var str = '';
     if (pageNum > 0) {
         str += '<li><a href="?pageNum=' + (pageNum - 1) + '&pageSize=' + pageSize + '">上一页</a></li>';

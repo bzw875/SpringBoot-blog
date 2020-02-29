@@ -4,6 +4,7 @@ package com.bzw875.blog.controller;
 import com.bzw875.blog.repository.PostRepository;
 import com.bzw875.blog.model.Post;
 import com.bzw875.blog.service.WebSecurityConfig;
+import com.bzw875.blog.utils.MarkDown2HtmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +58,9 @@ public class PostController {
                                  HttpServletRequest request,
                                  @PathVariable Integer id) {
         Post pp = postRepository.findById(id).get();
+        String postContentHtml = MarkDown2HtmlUtils.markdown2Html(pp.getContent());
         model.addAttribute("post", pp);
+        model.addAttribute("postContentHtml", postContentHtml);
         Cookie[] cookies =  request.getCookies();
         boolean isLogin = false;
         if(cookies != null){

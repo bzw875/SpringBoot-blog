@@ -12,7 +12,7 @@
 </head>
 <body>
 <div th:include="common::header"></div>
-<div class="edit-plane">
+<div class="main">
     <form method="POST" action="/post/add">
         <h1>写文章</h1>
         <p>
@@ -25,7 +25,7 @@
             <label>正文:</label>
         </p>
         <p>
-            <textarea cols="10" rows="12" name="content"></textarea>
+            <textarea class="content-input" cols="10" rows="12" name="content"></textarea>
         </p>
         <p>
             <input type="hidden" name="author" th:value="${author}">
@@ -34,6 +34,7 @@
         </p>
     </form>
 </div>
-<div th:include="common::ICP"></div>
+<div th:include="common::default"></div>
+<script src="https://cdn.bootcss.com/remarkable/2.0.0/remarkable.min.js"></script>
 </body>
 </html>

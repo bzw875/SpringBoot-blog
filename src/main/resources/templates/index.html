@@ -9,7 +9,6 @@
     <link href="/images/favicon.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <script type="application/javascript" src="/js/jquery.min.js"></script>
 </head>
 <body>
 
@@ -37,8 +36,7 @@
 
 
 </div>
-<div th:include="common::ICP"></div>
-<script type="application/javascript" src="/js/tool.js"></script>
+<div th:include="common::default"></div>
 <input type="hidden" name="pageNum" th:value="${pageNum}">
 <input type="hidden" name="pageSize" th:value="${pageSize}">
 <input type="hidden" name="pageCount" th:value="${pageCount}">

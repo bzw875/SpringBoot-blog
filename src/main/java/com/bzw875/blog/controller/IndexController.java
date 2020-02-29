@@ -93,8 +93,10 @@ public class IndexController {
 
 	@RequestMapping(value = "/write")
 	public String write(Model  model) {
+		Post pp = new Post();
+		model.addAttribute("post", pp);
 		model.addAttribute("author", "bzw875");
-		return "write";
+		return "edit";
 	}
 
 
