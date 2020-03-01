@@ -58,3 +58,9 @@ html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:b
 .hide {
     display: none
 }
+blockquote {
+    background-color: #eeeeee;
+    border-left: 3px solid #ccc;
+    padding-left: 2em;
+    margin-left: 0;
+}

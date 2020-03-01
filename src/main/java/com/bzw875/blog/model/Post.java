@@ -18,6 +18,8 @@ public class Post {
 
     private String author;
 
+    private Integer visits;
+
     private Date creationTime;
 
     private Date modificationTime;
@@ -52,6 +54,14 @@ public class Post {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Integer getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Integer visits) {
+        this.visits = visits;
     }
 
     public Date getCreationTime() {

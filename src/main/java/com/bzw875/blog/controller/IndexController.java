@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,8 @@ public class IndexController {
 	public String index(Model  model,
 		@RequestParam(value = "pageNum", required = true, defaultValue = "0") Integer pageNum,
 		@RequestParam(value = "pageSize", required = true, defaultValue = "10") Integer pageSize) {
-		PageRequest pageReques = PageRequest.of(pageNum, pageSize);   //获取第1页的两条记录
+		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "modificationTime"));
+		PageRequest pageReques = PageRequest.of(pageNum, pageSize, sort);   //获取第1页的两条记录
 		Page<Post> page = postRepository.findAll(pageReques);
 		List<Post> pages= page.getContent();
 		int total = page.getTotalPages() * pageSize;
@@ -72,6 +74,7 @@ public class IndexController {
 
 		if(username.equals(SystemUserName) && password.equals(systemUserPassword)){
 			Cookie cookie = new Cookie(WebSecurityConfig.SESSION_KEY, SystemUserName);
+			cookie.setMaxAge(60*60*24*30);
 			response.addCookie(cookie);
 			return "redirect:/";
 		}else {

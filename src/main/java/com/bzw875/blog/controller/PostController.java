@@ -70,7 +70,11 @@ public class PostController {
                 }
             }
         }
-        model.addAttribute("isLogin", isLogin);
+        if (!isLogin) {
+            model.addAttribute("isLogin", isLogin);
+            pp.setVisits(pp.getVisits() + 1);
+            postRepository.save(pp);
+        }
         return "post";
     }
 

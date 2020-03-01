@@ -32,9 +32,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
         // 排除配置
         addInterceptor.excludePathPatterns(
                 "/",
-                "/home",
                 "/post/detail/**",
-                "/all",
                 "/login",
                 "/dologin",
                 "/loginout",
@@ -56,6 +54,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
                 throws Exception {
             Cookie[] cookies = request.getCookies();
             String path =request.getServletPath();
+            System.out.println(path);
             if(path.contains("article") || path.contains("login")){
                 return true;
             }

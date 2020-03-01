@@ -35,6 +35,13 @@ system.user.password=password
 // 打包
 mvn clean package  -Dmaven.test.skip=true
 
+// linux 查找java进程
+ps -ef | grep java
+
+// linux 杀死 java进程
+kill -9 进程ID
+
+
 // 运行
 java -jar app.jar
 // nohup 运行
@@ -46,3 +53,9 @@ java -jar app.jar --spring.profiles.active=prod
 // 指定端口
 java -jar blog-0.0.1-SNAPSHOT.jar --server.port=9090
 ```
+
+## TODO LIST
++ 登录安全
++ 软删除
++ 文章阅读次数
++ 访客数据统计
