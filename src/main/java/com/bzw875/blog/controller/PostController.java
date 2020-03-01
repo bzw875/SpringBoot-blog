@@ -70,8 +70,8 @@ public class PostController {
                 }
             }
         }
+        model.addAttribute("isLogin", isLogin);
         if (!isLogin) {
-            model.addAttribute("isLogin", isLogin);
             pp.setVisits(pp.getVisits() + 1);
             postRepository.save(pp);
         }
@@ -79,7 +79,7 @@ public class PostController {
     }
 
 
-    @PostMapping(path="/edit/{id}")
+    @PostMapping(path="/edit/")
     public void editPost (HttpServletResponse response,
                             @RequestParam Integer id,
                             @RequestParam String content,
@@ -104,7 +104,7 @@ public class PostController {
         Optional<Post> p = postRepository.findById(id);
         Post pp = p.get();
         model.addAttribute("post", pp);
-        System.out.printf("编辑页面");
+        model.addAttribute("author", "bzw875");
         return "edit";
     }
 }

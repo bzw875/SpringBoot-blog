@@ -13,7 +13,7 @@
 <body>
     <div th:include="common::header"></div>
     <div class="main">
-        <form method="POST" th:action="@{/post/edit/{postId}(postId=${post.id})}">
+        <form method="POST" th:action="${post.id} ? '/post/edit/' : '/post/add'">
             <h1>编辑</h1>
             <p>
                 <label>标题:</label>
@@ -23,6 +23,7 @@
                 <button type="submit" class="btn-info">提交</button>
                 <button type="button" class="btn-light" onclick="switchReview(this)">预览</button>
                 <input type="hidden" name="id" th:value="${post.id}">
+                <input type="hidden" name="author" th:value="${author}">
             </p>
             <div id="editDiv">
                 <label>正文:</label>
