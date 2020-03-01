@@ -20,6 +20,8 @@ public class Post {
 
     private Integer visits;
 
+    private Boolean isDelete;
+
     private Date creationTime;
 
     private Date modificationTime;
@@ -63,6 +65,12 @@ public class Post {
     public void setVisits(Integer visits) {
         this.visits = visits;
     }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) { this.isDelete = isDelete; }
 
     public Date getCreationTime() {
         return creationTime;

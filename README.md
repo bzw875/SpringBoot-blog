@@ -60,8 +60,9 @@ nohup java -jar app.jar --spring.profiles.active=prod &
 exit
 ```
 
-## TODO LIST
-+ 登录安全
-+ 软删除
-+ 文章阅读次数
-+ 访客数据统计
+## FEATURES
++ 登录安全 TODO
++ 软删除 DONE
++ 文章阅读次数 DONE
++ 访客数据统计 TODO
++ 图片上传和展示

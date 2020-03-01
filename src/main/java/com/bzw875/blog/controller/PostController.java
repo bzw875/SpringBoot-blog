@@ -44,7 +44,9 @@ public class PostController {
     public void delete(HttpServletResponse response,
                        @PathVariable Integer id
     ) throws IOException {
-        postRepository.deleteById(id);
+        Post pp = postRepository.findById(id).get();
+        pp.setIsDelete(true);
+        postRepository.save(pp);
         response.sendRedirect("/");
     }
 

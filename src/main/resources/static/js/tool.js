@@ -70,22 +70,30 @@ function indexInitNav () {
         return;
     }
 
+    var showAll = pageCount < 15;
+
     var str = '';
-    if (pageNum > 0) {
+    if (!showAll && pageNum > 0) {
         str += '<li><a href="?pageNum=' + (pageNum - 1) + '&pageSize=' + pageSize + '">上一页</a></li>';
     }
     if (pageNum > 5) {
         str += '<li><a href="?pageNum=0&pageSize=' + pageSize + '">1..</a></li>';
     }
-
-    var start = Math.max(0, pageNum - 5);
-    var end = Math.min( pageNum + 5, pageCount - 1);
+    if (showAll) {
+        var start = 0;
+        var end = pageCount;
+    } else {
+        var start = Math.max(0, pageNum - 5);
+        var end = Math.min(pageNum + 5, pageCount - 1);
+    }
     for (var i = start; i < end; i++) {
         var className = i === pageNum ? 'selected' : '';
         str += '<li class="'+className+'"><a href="?pageNum='+i+'&pageSize=' + pageSize+'">'+(i+1)+'</a></li>';
     }
-    str += '<li class="' + (pageNum+1 === pageCount ? 'selected' : '') + '"><a title="最后一页" href="?pageNum='+(pageCount-1)+'&pageSize=' + pageSize+'">...'+pageCount+'</a></li>';
-    if (pageCount > (pageNum+1)){
+    if (!showAll) {
+        str += '<li class="' + (pageNum + 1 === pageCount ? 'selected' : '') + '"><a title="最后一页" href="?pageNum=' + (pageCount - 1) + '&pageSize=' + pageSize + '">...' + pageCount + '</a></li>';
+    }
+    if (!showAll && pageCount > (pageNum+1)){
         str += '<li><a href="?pageNum='+(pageNum+1)+'&pageSize=' + pageSize+'">下一页</a></li>';
     }
     nav.html(str);

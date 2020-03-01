@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,11 +44,15 @@ public class IndexController {
 
 	@RequestMapping(value = "/")
 	public String index(Model  model,
+		@RequestParam(value = "sort", required = true, defaultValue = "dest") String sort,
 		@RequestParam(value = "pageNum", required = true, defaultValue = "0") Integer pageNum,
 		@RequestParam(value = "pageSize", required = true, defaultValue = "10") Integer pageSize) {
-		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "modificationTime"));
-		PageRequest pageReques = PageRequest.of(pageNum, pageSize, sort);   //获取第1页的两条记录
-		Page<Post> page = postRepository.findAll(pageReques);
+
+		Pageable pageable = new PageRequest(pageNum,
+				pageSize,
+				sort == "'desc'" ? Sort.Direction.DESC : Sort.Direction.ASC,
+				"creationTime");
+		Page<Post> page = postRepository.findByIsDelete(false, pageable);
 		List<Post> pages= page.getContent();
 		int total = page.getTotalPages() * pageSize;
 		int pageCount = (int) Math.ceil(total/pageSize);

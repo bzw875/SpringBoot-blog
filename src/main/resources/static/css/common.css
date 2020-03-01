@@ -199,82 +199,80 @@ button {
 }
 .page-nav {
     overflow: hidden;
-    margin-right: 1em;
 }
 .page-nav li {
     float: left;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 .page-nav a {
     display: block;
-    padding: 0 8px;
+    padding: 4px 12px;
     height: 20px;
     line-height: 20px;
-    background-color: #fafafa;
-    border: 1px solid #ddd;
+    background-color: #e5e5e5;
 }
 .post-content pre {
-    padding: 16px;
-    overflow: auto;
-    font-size: 85%;
-    line-height: 1.45;
-    background-color: #f6f8fa;
-    border-radius: 3px;
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f6f8fa;
+border-radius: 3px;
 }
 .post-content pre code {
-    background-color: transparent;
+background-color: transparent;
 }
 .post-content code {
-    padding: .2em .4em;
-    margin: 0;
-    font-size: 14px;
-    background-color: rgba(27,31,35,.05);
-    border-radius: 3px;
+padding: .2em .4em;
+margin: 0;
+font-size: 14px;
+background-color: rgba(27,31,35,.05);
+border-radius: 3px;
 }
 .post-content a {
-    color: #0366d6;
-    text-decoration: none;
+color: #0366d6;
+text-decoration: none;
 }
 .post-content h1,
 .post-content h2 {
-    border-bottom: 1px solid #eaecef;
+border-bottom: 1px solid #eaecef;
 }
 .post-content h3 {
-    font-size: 18px;
+font-size: 18px;
 }
 .page-nav a:hover {
-    color: #000;
-    background-color: #f2f2f2;
+color: #000;
+background-color: #f2f2f2;
 }
 .page-nav .selected a {
-    color: #000;
-    border-color: transparent;
-    background-color: transparent;
+color: #000;
+border-color: transparent;
+background-color: transparent;
 }
 .edit-box {
-    background-color: #fff;
+background-color: #fff;
 }
 .post-menu>form {
-    display: inline-block;
-    margin-left: 2em;
+display: inline-block;
+margin-left: 2em;
 }
 
 .login-form {
-    width: 480px;
-    margin: 0 auto;
+width: 480px;
+margin: 0 auto;
 }
 .post-menu {
-    margin: 10px 0 60px;
+margin: 10px 0 60px;
 }
 .post-content {
-    font-size: 14px;
+font-size: 14px;
 }
 .content-input {
-    height: 600px;
+height: 600px;
 }
 .edit-menu {
-    display: flex;
+display: flex;
 }
 .edit-menu>button:first-child {
-    margin-right: 10px;
+margin-right: 10px;
 }
