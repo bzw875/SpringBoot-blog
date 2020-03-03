@@ -14,6 +14,14 @@
     <style>
         body {
             background-image: url("/images/index_bg.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .footer-bar a {
+            display: block;
+            width: 100%;
+            padding: 3px 12px;
+            color: #fff;
         }
     </style>
 </head>
@@ -39,15 +47,17 @@
             <span th:text="${total}"></span>
             篇
         </div>
+        <a th:if="${sort} == 'desc'" th:href="'?pageNum='+${pageNum}+'&pageSize='+${pageSize}+'&sort=asc'">最旧文章</a>
+        <a th:if="${sort} == 'asc'" th:href="'?pageNum='+${pageNum}+'&pageSize='+${pageSize}+'&sort=desc'">最新文章</a>
     </div>
 
 
 </div>
 <div th:include="common::default"></div>
-<input type="hidden" name="pageNum" th:value="${pageNum}">
-<input type="hidden" name="pageSize" th:value="${pageSize}">
-<input type="hidden" name="pageCount" th:value="${pageCount}">
-<input type="hidden" name="total" th:value="${total}">
+<input type="hidden" id="pageNum" th:value="${pageNum}">
+<input type="hidden" id="pageSize" th:value="${pageSize}">
+<input type="hidden" id="pageCount" th:value="${pageCount}">
+<input type="hidden" id="total" th:value="${total}">
 <script>
 $(function(){
     indexInitNav();

@@ -44,14 +44,15 @@ public class IndexController {
 
 	@RequestMapping(value = "/")
 	public String index(Model  model,
-		@RequestParam(value = "sort", required = true, defaultValue = "dest") String sort,
+		@RequestParam(value = "sort", required = true, defaultValue = "desc") String sort,
 		@RequestParam(value = "pageNum", required = true, defaultValue = "0") Integer pageNum,
 		@RequestParam(value = "pageSize", required = true, defaultValue = "10") Integer pageSize) {
 
 		Pageable pageable = new PageRequest(pageNum,
 				pageSize,
-				sort == "'desc'" ? Sort.Direction.DESC : Sort.Direction.ASC,
+				sort.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
 				"creationTime");
+		System.out.println(pageable.getSort());
 		Page<Post> page = postRepository.findByIsDelete(false, pageable);
 		List<Post> pages= page.getContent();
 		int total = page.getTotalPages() * pageSize;
@@ -61,6 +62,7 @@ public class IndexController {
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("total", total);
+		model.addAttribute("sort", sort);
 		model.addAttribute("posts", pages);
 
 		return "index";

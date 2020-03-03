@@ -18,7 +18,9 @@
     <h1 th:text="${post.title}"></h1>
     <div class="post-menu">
         <span class="calc-recently-date" th:text="${post.creationTime}"></span>
-        阅读: <span th:text="${post.visits}"></span>
+        <span>
+            阅读: <span th:text="${post.visits}"></span>
+        </span>
         <form method="get" th:action="@{'/post/edit/' + ${post.id}}">
             <button th:if="${isLogin}" type="submit" >编辑</button>
         </form>

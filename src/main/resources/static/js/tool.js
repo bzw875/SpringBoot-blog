@@ -60,9 +60,9 @@ function calcRecentlyDateStr(dateIn){
 }
 //fegewgwgewe
 function indexInitNav () {
-    var pageNum = parseInt($('[name="pageNum"]').val());
-    var pageSize = parseInt($('[name="pageSize"]').val());
-    var pageCount = parseInt($('[name="pageCount"]').val());
+    var pageNum = parseInt($('#pageNum').val());
+    var pageSize = parseInt($('#pageSize').val());
+    var pageCount = parseInt($('#pageCount').val());
 
     var nav = $('#pageNav');
     if (pageCount<=1) {

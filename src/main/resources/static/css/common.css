@@ -2,15 +2,18 @@ html,
 body {
     margin: 0;
     background-color: #eee;
-    min-height: 100%;
     box-sizing: border-box;
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
     background-image: url("../images/bg.png");
+}
+html {
+    height: 100%;
 }
 body {
     color: #000;
     font-size: 13px;
     line-height: 1.6;
+    min-height: 100%;
     position: relative;
 }
 input, button, textarea {
@@ -95,10 +98,11 @@ input[type="button"] {
     border: 1px solid #ddd;
 }
 .footer-bar {
-    width: 900px;
+    width: 960px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    box-sizing: border-box;
 }
 .top-bar {
 
@@ -191,6 +195,9 @@ button {
     display: flex;
     align-items: center;
 }
+.foot-div>* {
+    margin-right: 1em;
+}
 .page-nav,
 .page-nav li {
     list-style: none;
@@ -256,7 +263,9 @@ background-color: #fff;
 display: inline-block;
 margin-left: 2em;
 }
-
+.post-menu>span {
+    margin-right: 1em;
+}
 .login-form {
 width: 480px;
 margin: 0 auto;
