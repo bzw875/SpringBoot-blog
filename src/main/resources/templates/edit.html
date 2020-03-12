@@ -17,16 +17,26 @@
     <div class="main">
         <form method="POST" th:action="${post.id} ? '/post/edit/' : '/post/add'">
             <h1>编辑</h1>
-            <p>
+            <div class="fieldsetDiv">
                 <label>标题:</label>
                 <input type="text" th:value="${post.title}"  name="title">
-            </p>
-            <p class="edit-menu">
+            </div>
+            <div class="fieldsetDiv">
+                <label>标签:</label>
+                <div>
+                    <label class="badge" th:each="obj : ${tags}">
+                        <input type="checkbox" th:value="${obj.id}" name="tags">
+                        <span th:text="${obj.name}"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="fieldsetDiv edit-menu">
                 <button type="submit" class="btn-info">提交</button>
                 <button type="button" class="btn-light" onclick="switchReview(this)">预览</button>
                 <input type="hidden" name="id" th:value="${post.id}">
                 <input type="hidden" name="author" th:value="${author}">
-            </p>
+                <input type="hidden" id="tagsValue" th:value="${post.tags}">
+            </div>
             <div id="editDiv">
                 <label>正文:</label>
                 <textarea class="content-input" id="postContent" cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
@@ -38,6 +48,14 @@
     </div>
     <div th:include="common::default"></div>
 <script>
+    $(function () {
+        var tags = $('#tagsValue').val().split(',');
+        $('input[name="tags"]').each(function (i, ele) {
+            if (tags.indexOf(ele.value)>=0) {
+                ele.setAttribute('checked', 'true');
+            }
+        })
+    })
     function switchReview(ele){
         if (switchReview.isReview) {
             ele.textContent = '编辑';

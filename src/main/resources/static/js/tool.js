@@ -59,6 +59,11 @@ function calcRecentlyDateStr(dateIn){
     return formatDate(dateIn, 'yyyy-MM-dd hh:mm');
 }
 //fegewgwgewe
+// <input type="hidden" id="pageNum" value="0">
+//     <input type="hidden" id="pageSize" value="10">
+//     <input type="hidden" id="pageCount" value="3">
+//     <input type="hidden" id="total" value="30">
+
 function indexInitNav () {
     var pageNum = parseInt($('#pageNum').val());
     var pageSize = parseInt($('#pageSize').val());
@@ -86,7 +91,7 @@ function indexInitNav () {
         var start = Math.max(0, pageNum - 5);
         var end = Math.min(pageNum + 5, pageCount - 1);
     }
-    for (var i = start; i < end; i++) {
+    for (var i = start; i <= end; i++) {
         var className = i === pageNum ? 'selected' : '';
         str += '<li class="'+className+'"><a href="?pageNum='+i+'&pageSize=' + pageSize+'">'+(i+1)+'</a></li>';
     }

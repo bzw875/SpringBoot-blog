@@ -16,6 +16,11 @@
 <div th:include="common::header"></div>
 <div class="main">
     <h1 th:text="${post.title}"></h1>
+    <div>
+        <label class="badge" th:each="obj : ${tags}">
+            <a th:href="@{/post/tag/{objId}(objId=${obj.id})}" th:text="${obj.name}"></a>
+        </label>
+    </div>
     <div class="post-menu">
         <span class="calc-recently-date" th:text="${post.creationTime}"></span>
         <span>

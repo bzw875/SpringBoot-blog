@@ -18,6 +18,7 @@ public class Post {
 
     private String author;
 
+
     private Integer visits;
 
     private Boolean isDelete;

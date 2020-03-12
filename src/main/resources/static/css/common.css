@@ -85,6 +85,9 @@ input[type="button"] {
     background-color: #f8f9fa;
     border-color: #d6d6d6;
 }
+.fieldsetDiv {
+    margin-bottom: 20px;
+}
 .edit-plane,
 .main {
     position: relative;
@@ -284,4 +287,35 @@ display: flex;
 }
 .edit-menu>button:first-child {
 margin-right: 10px;
+}
+.badge {
+    display: inline-block;
+    margin: 2px;
+}
+.badge a,
+.badge span {
+    cursor: pointer;
+    display: inline-block;
+    min-width: 10px;
+    padding: 1px 7px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #eff4f6;
+    border-radius: 4px;
+    color: #43798f;
+}
+.badge a:hover
+.badge span:hover {
+    background-color: #d2e2e8;
+}
+.badge input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.badge input:checked+a,
+.badge input:checked+span {
+    color: #fff;
+    background-color: #64909c;
 }
