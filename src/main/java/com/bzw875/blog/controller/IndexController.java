@@ -1,9 +1,10 @@
 package com.bzw875.blog.controller;
 
-import com.bzw875.blog.model.Tag;
-import com.bzw875.blog.model.Post;
 import com.bzw875.blog.model.Person;
+import com.bzw875.blog.model.Post;
+import com.bzw875.blog.model.Tag;
 import com.bzw875.blog.repository.PostRepository;
+import com.bzw875.blog.repository.PostTagRepository;
 import com.bzw875.blog.repository.TagRepository;
 import com.bzw875.blog.service.WebSecurityConfig;
 import org.slf4j.Logger;
@@ -34,6 +35,9 @@ import java.util.List;
 public class IndexController {
 	@Autowired
 	private PostRepository postRepository;
+
+	@Autowired
+	private PostTagRepository postTagRepository;
 
 	@Autowired
 	private TagRepository tagRepository;

@@ -1,21 +1,25 @@
 <div th:fragment="header">
     <header class="top-bar">
         <div class="clearfix">
-            <h1 class="logo pull-left"><a href="/">小园香径</a></h1>
+            <h1 class="logo pull-left"><a href="/">编程技术分享</a></h1>
+            <nav class="pull-right">
+                <a href="/tags">标签</a>
+                <a href="/login">登录</a>
+                <a href="/loginout">登出</a>
+                <a href="/write">写文章</a>
+                <a href="/mique">mique</a>
+            </nav>
         </div>
+
     </header>
     <p th:text="${errorrMessage}"></p>
 </div>
 
 <div th:fragment="default">
     <div class="footer-bar">
-        <a href="http://www.miibeian.gov.cn/">沪ICP备19005907号-1</a>
+        <a href="http://beian.miit.gov.cn">沪ICP备19005907号-1</a>
     </div>
     <script type="application/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script type="application/javascript" src="https://cdn.bootcss.com/remarkable/2.0.0/remarkable.min.js"></script>
     <script type="application/javascript" src="/js/tool.js"></script>
 </div>
-
-
-
-

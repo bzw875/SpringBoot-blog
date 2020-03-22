@@ -70,7 +70,7 @@ function indexInitNav () {
     var pageCount = parseInt($('#pageCount').val());
 
     var nav = $('#pageNav');
-    if (pageCount<=1) {
+    if (isNaN(pageNum) || pageCount<=1) {
         nav.hide();
         return;
     }

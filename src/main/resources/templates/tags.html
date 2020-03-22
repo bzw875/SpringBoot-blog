@@ -17,6 +17,7 @@
 <div th:include="common::header"></div>
 <p th:text="${message}"></p>
 <div class="main">
+    <h1>标签</h1>
     <div class="badge" th:each="obj : ${tags}">
         <a th:href="@{/post/tag/{objId}(objId=${obj.id})}" th:text="${obj.name}"></a>
     </div>

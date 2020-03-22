@@ -3,17 +3,17 @@ package com.bzw875.blog.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
+@Table(name = "post")
 public class Post {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+
     private Integer id;
 
     private String title;
 
 
-    @Column(length=10240)
     private String content;
 
     private String author;
@@ -27,6 +27,10 @@ public class Post {
 
     private Date modificationTime;
 
+    private Set<PostTag> postTags;
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer getId() {
         return id;
     }
@@ -43,6 +47,7 @@ public class Post {
         this.title = title;
     }
 
+    @Column(length=10240)
     public String getContent() {
         return content;
     }
@@ -87,6 +92,16 @@ public class Post {
 
     public void setModificationTime(Date modificationTime) {
         this.modificationTime = modificationTime;
+    }
+
+
+    @OneToMany(mappedBy = "post")
+    public Set<PostTag> getPostTags() {
+        return postTags;
+    }
+
+    public void setPostTags(Set<PostTag> postTags) {
+        this.postTags = postTags;
     }
 
 }
