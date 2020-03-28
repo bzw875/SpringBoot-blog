@@ -33,19 +33,31 @@ public class PostController {
     private TagRepository tagRepository;
 
     @PostMapping(path="/add")
-    public String addNewPost (@RequestParam String author
-            , @RequestParam String content
-            , @RequestParam String title) {
+    public String addNewPost (@RequestParam String author,
+                              @RequestParam String content,
+                              @RequestParam(value = "tags", required = false) List<Integer> tags,
+                              @RequestParam String title) {
 
         Date d = new Date();
 
         Post n = new Post();
         n.setContent(content);
         n.setTitle(title);
+        n.setVisits(0);
+        n.setIsDelete(false);
         n.setAuthor(author);
         n.setCreationTime(d);
         n.setModificationTime(d);
         postRepository.save(n);
+
+        if (tags!=null) {
+            for (int tagid : tags) {
+                PostTag pt = new PostTag();
+                pt.setPost(n);
+                pt.setTag(tagRepository.findById(tagid).get());
+                postTagRepository.save(pt);
+            }
+        }
         return "write";
     }
 
@@ -81,7 +93,7 @@ public class PostController {
         model.addAttribute("total", total);
         model.addAttribute("sort", "asc");
         model.addAttribute("posts", pages);
-        return "/index";
+        return "index";
     }
 
     @GetMapping(path="/detail/{id}")

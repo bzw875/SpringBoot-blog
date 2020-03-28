@@ -11,21 +11,6 @@
     <link href="/images/favicon.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <style>
-        body {
-            background-image: url("/images/index_bg.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            padding-bottom: 50px;
-        }
-        div.footer-bar {
-            margin: 0 auto;
-            text-align: center;
-            width: auto;
-            margin-top: 30px;
-            padding: 0;
-        }
-</style>
 </head>
 <body>
 
@@ -52,9 +37,9 @@
         <a th:if="${sort} == 'desc'" th:href="'?pageNum='+${pageNum}+'&pageSize='+${pageSize}+'&sort=asc'">最旧文章</a>
         <a th:if="${sort} == 'asc'" th:href="'?pageNum='+${pageNum}+'&pageSize='+${pageSize}+'&sort=desc'">最新文章</a>
     </div>
-    <div th:include="common::default"></div>
-</div>
 
+</div>
+<div th:include="common::default"></div>
 <input type="hidden" id="pageNum" th:value="${pageNum}">
 <input type="hidden" id="pageSize" th:value="${pageSize}">
 <input type="hidden" id="pageCount" th:value="${pageCount}">

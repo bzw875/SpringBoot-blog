@@ -11,6 +11,27 @@
     <link href="/images/favicon.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <style>
+        .main {
+            width: auto;
+            max-width: 1280px;
+        }
+        .left {
+            float: left;
+            width: 49%;
+        }
+        .right {
+            float: right;
+            width: 50%;
+        }
+        .review-div {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 4px;
+            min-height: 600px;
+        }
+    </style>
 </head>
 <body>
     <div th:include="common::header"></div>
@@ -32,45 +53,47 @@
             </div>
             <div class="fieldsetDiv edit-menu">
                 <button type="submit" class="btn-info">提交</button>
-                <button type="button" class="btn-light" onclick="switchReview(this)">预览</button>
                 <input type="hidden" name="id" th:value="${post.id}">
                 <input type="hidden" name="author" th:value="${author}">
                 <input type="hidden" id="tagsValue" th:value="${postTagIds}">
             </div>
-            <div id="editDiv">
-                <label>正文:</label>
-                <textarea class="content-input" id="postContent" cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
-            </div>
-            <div id="reviewDiv">
-                <div></div>
+            <div class="clearfix">
+                <div id="editDiv" class="right">
+                    <label>正文:</label>
+                    <textarea class="content-input" id="postContent"
+                              oninput="reviewEditContent()"
+                              cols="10" rows="5" name="content"  th:text="${post.content}"></textarea>
+                </div>
+                <div class="left review-div" id="reviewDiv">
+                    <div></div>
+                </div>
             </div>
         </form>
     </div>
     <div th:include="common::default"></div>
 <script>
-    $(function () {
-        var tags = $('#tagsValue').val().split(',');
-        $('input[name="tags"]').each(function (i, ele) {
-            if (tags.indexOf(ele.value)>=0) {
-                ele.setAttribute('checked', 'true');
-            }
-        })
-    })
-    function switchReview(ele){
-        if (switchReview.isReview) {
-            ele.textContent = '编辑';
-            $('#editDiv').hide();
-            $('#reviewDiv').show();
-            var md = new remarkable.Remarkable();
-            var postContent = $('#postContent');
-            $('#reviewDiv>div').html(md.render(postContent.val()));
-        } else {
-            ele.textContent = '预览';
-            $('#editDiv').show();
-            $('#reviewDiv').hide();
+var md = new remarkable.Remarkable();
+var isRender;
+$(function () {
+    var tags = $('#tagsValue').val().split(',');
+    $('input[name="tags"]').each(function (i, ele) {
+        if (tags.indexOf(ele.value) >= 0) {
+            ele.setAttribute('checked', 'true');
         }
-        switchReview.isReview = !switchReview.isReview;
+    });
+    reviewEditContent();
+});
+function reviewEditContent(){
+    if (!isRender) {
+        console.log('markdown render');
+        var postContent = $('#postContent');
+        $('#reviewDiv>div').html(md.render(postContent.val()));
+        isRender = true;
     }
+    setTimeout(function(){
+        isRender = false;
+    }, 1000*5);
+}
 </script>
 </body>
 </html>
