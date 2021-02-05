@@ -4,7 +4,28 @@ $(function(){
         var d = new Date(ele.textContent);
         ele.textContent = calcRecentlyDateStr(d);
     });
+    highlightCode();
 });
+
+function highlightCode () {
+    const contentDiv = $('.post-content')
+    if (contentDiv) {
+        const codeDivs = contentDiv.find('code')
+        codeDivs.each((i, code) => addAttr(code));
+    }
+}
+
+function addAttr(ele) {
+	const text = ele.textContent;
+	const langReg = /\s*\/\/\s?(\w+)\s+/;
+	const matchData = text.match(langReg);
+	const removeCommText = text.replace(langReg, '');
+	if (matchData && matchData[1]) {
+		const lang = matchData[1].toLowerCase();
+		const parentEle = ele.parentElement;
+		parentEle.innerHTML =  Prism.highlight(removeCommText, Prism.languages.javascript, 'javascript');
+	}
+}
 
 function formatDate(t,str){
     if (typeof t === 'number') {

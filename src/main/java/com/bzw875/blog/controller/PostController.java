@@ -157,20 +157,22 @@ public class PostController {
                 postTagRepository.delete(pt);
             }
         }
-        for (Integer tagid : tags) {
-            boolean isFind = false;
-            for (PostTag pt : pts) {
-                if (tagid == pt.getTag().getId()) {
-                    isFind = true;
+        if (tags!=null) {
+            for (Integer tagid : tags) {
+                boolean isFind = false;
+                for (PostTag pt : pts) {
+                    if (tagid == pt.getTag().getId()) {
+                        isFind = true;
+                    }
                 }
-            }
-            if (!isFind) {
-                PostTag ptnew = new PostTag();
-                Optional<Tag> optag = tagRepository.findById(tagid);
+                if (!isFind) {
+                    PostTag ptnew = new PostTag();
+                    Optional<Tag> optag = tagRepository.findById(tagid);
 
-                ptnew.setTag(optag.get());
-                ptnew.setPost(n);
-                postTagRepository.save(ptnew);
+                    ptnew.setTag(optag.get());
+                    ptnew.setPost(n);
+                    postTagRepository.save(ptnew);
+                }
             }
         }
         response.sendRedirect("/post/detail/" + pp.getId());
