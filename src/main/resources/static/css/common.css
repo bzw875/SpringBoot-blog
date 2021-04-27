@@ -322,3 +322,16 @@ display: flex;
     color: #fff;
     background-color: #64909c;
 }
+@media screen and (max-width: 480px){
+    html,body {
+        width: 100%
+    }
+    .footer-bar,
+    .main {
+        width: 100%;
+    }
+    .post-content pre,
+    .main {
+        padding: 8px;
+    }
+}

@@ -1,7 +1,8 @@
 $(function(){
     var spans = document.querySelectorAll('.calc-recently-date');
     [].forEach.call(spans, function(ele){
-        var d = new Date(ele.textContent);
+        var text = ele.textContent.replace(' ', 'T');
+        var d = new Date(text);
         ele.textContent = calcRecentlyDateStr(d);
     });
     highlightCode();
