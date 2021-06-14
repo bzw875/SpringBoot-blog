@@ -1,6 +1,5 @@
 package com.bzw875.blog.controller;
 
-import com.bzw875.blog.model.Person;
 import com.bzw875.blog.model.Post;
 import com.bzw875.blog.model.Tag;
 import com.bzw875.blog.repository.PostRepository;
@@ -127,19 +126,4 @@ public class IndexController {
 		return "edit";
 	}
 
-
-	@RequestMapping(value = "/mique")
-	public String mique(Model  model) {
-		Person single = new Person("hyj",21);
-		List<Person> people = new ArrayList<Person>();
-		Person p1 = new Person("dlp",21);
-		Person p2 = new Person("tq",21);
-		Person p3 = new Person("mk",21);
-		people.add(p1);
-		people.add(p2);
-		people.add(p3);
-		model.addAttribute("singlePerson",single);
-		model.addAttribute("people",people);
-		return "admin";
-	}
 }

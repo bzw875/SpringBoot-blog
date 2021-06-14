@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
                 "/",
                 "/post/detail/**",
                 "/login",
+                "/article/**",
                 "/dologin",
                 "/loginout",
                 "/test",
