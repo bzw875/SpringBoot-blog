@@ -1,4 +1,4 @@
-$(function(){
+document.addEventListener('DOMContentLoaded', function() {
     var spans = document.querySelectorAll('.calc-recently-date');
     [].forEach.call(spans, function(ele){
         var text = ele.textContent.replace(' ', 'T');
@@ -6,14 +6,10 @@ $(function(){
         ele.textContent = calcRecentlyDateStr(d);
     });
     highlightCode();
-});
+})
 
 function highlightCode () {
-    const contentDiv = $('.post-content')
-    if (contentDiv) {
-        const codeDivs = contentDiv.find('code')
-        codeDivs.each((i, code) => addAttr(code));
-    }
+    document.querySelectorAll('.post-content code').forEach((ele,i) => addAttr(ele))
 }
 
 function addAttr(ele) {
@@ -87,13 +83,13 @@ function calcRecentlyDateStr(dateIn){
 //     <input type="hidden" id="total" value="30">
 
 function indexInitNav () {
-    var pageNum = parseInt($('#pageNum').val());
-    var pageSize = parseInt($('#pageSize').val());
-    var pageCount = parseInt($('#pageCount').val());
+    var pageNum = parseInt(document.querySelector('#pageNum').value);
+    var pageSize = parseInt(document.querySelector('#pageSize').value);
+    var pageCount = parseInt(document.querySelector('#pageCount').value);
 
-    var nav = $('#pageNav');
+    var nav = document.querySelector('#pageNav');
     if (isNaN(pageNum) || pageCount<=1) {
-        nav.hide();
+        nav.style.display = 'none';
         return;
     }
 
@@ -123,5 +119,5 @@ function indexInitNav () {
     if (!showAll && pageCount > (pageNum+1)){
         str += '<li><a href="?pageNum='+(pageNum+1)+'&pageSize=' + pageSize+'">下一页</a></li>';
     }
-    nav.html(str);
+    nav.innerHTML = str;
 }
